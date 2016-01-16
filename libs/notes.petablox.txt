@@ -1,0 +1,20 @@
+Notes made on 01/16/2016:
+
+ISSUE:
+
+Manifestation of the problem: 
+   Booster worked fine on Mac Java7 and also on fir machines with Java7
+   It failed with Java6 on the fir machines with a crash while writing the class files after
+       inlining reflective calls.
+
+Solution:
+   Downloaded source zip for java_cup from https://github.com/Sable/java_cup.git
+   Modified build.xml to set source and target jvm as 1.6
+   Modified lines 11 and 12 of file java_cup-develop/src/java_cup/runtime/SyntaxTreeDFS.java
+     as there was a compilation error.
+     Original code:
+         private HashMap<String, ElementHandler> preMap = new HashMap<>();
+         private HashMap<String, ElementHandler> postMap = new HashMap<>();
+     Modified code:
+         private HashMap<String, ElementHandler> preMap = new HashMap<String, ElementHandler>();
+         private HashMap<String, ElementHandler> postMap = new HashMap<String, ElementHandler>();
